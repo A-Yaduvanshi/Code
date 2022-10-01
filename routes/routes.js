@@ -125,7 +125,7 @@ var upload = multer({
         res.send(req.file.filename)
         var title=req.body.title;
         var description=req.body.description;
-        var imgsrc = 'https://womensafety.cleverapps.io/api/uploads' + req.file.filename
+        var imgsrc = 'https://womensafety.cleverapps.io/api/upload' + req.file.filename
         // var insertData = ""
         con.query("INSERT INTO `Blogs`(`id`, `title`, `description`, `image`) VALUES (NULL,'"+title+"','"+description+"','"+imgsrc+"')", (err, result) => {
             if (err) throw err
