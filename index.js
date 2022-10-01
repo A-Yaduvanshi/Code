@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
     if(session.userid){
         res.send("Welcome User <a href=\'/logout'>click to logout</a>");
     }else
-    res.send('views/index.html')
+    res.send('session not define')
 })
 
 
