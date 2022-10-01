@@ -17,7 +17,7 @@ router.get('/register',(req,res)=>{
 if(name != undefined && email != undefined && password != undefined && mobile != undefined){
     con.query("INSERT INTO `users`(`id`, `name`, `email`, `mobile`, `password`) VALUES (NULL,'"+name+"','"+email+"','"+mobile+"','"+password+"')", function (err, result){
         var data = "{'status':Registration Complete'}";
-        res.status.send("Registration Complete"); 
+        res.status(200).send("Registration Complete"); 
     });
 }
 else{
@@ -36,7 +36,7 @@ router.get('/login',(req,res)=>{
 if(email != undefined && password != undefined){
     var sql="SELECT * FROM `users` WHERE `email`=? AND `password`=?";
     con.query(sql,[email,password], function (err, result){
-       res.status.send("User Login"); 
+       res.status(200).send("User Login"); 
     });
 }
 else{
