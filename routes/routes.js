@@ -63,13 +63,13 @@ if(email != undefined && password != undefined){
             if(results.length >0){
                 // res.send(results[0].email);
             //   const comparision =  bcrypt.compare(password, results[0].password)
-              if(email==results[0].email&&password===results[0].password){
+              if(email==results[0].email||password===results[0].password){
                   res.send({
                     "code":200,
                     "success":"login sucessfull"
-                  })
-              }
-              else{
+                  });
+                }
+            else{
                 res.send({
                      "code":204,
                      "success":"Email and password does not match"
