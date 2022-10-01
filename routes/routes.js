@@ -50,7 +50,7 @@ router.get('/logout',(req,res) => {
 }); 
 const oneDay = 1000 * 60 * 60 * 24;
 //session middleware
-app.use(sessions({
+app.use(session({
     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
     saveUninitialized:true,
     cookie: { maxAge: oneDay },
@@ -62,7 +62,7 @@ app.use(cookieParser());
 var session;
 app.get('/', (req, res) => {
     // res.send("hello")
-    session=req.session;
+    session=req.session.id;
     if(session){
         res.send("Welcome User <a href=\'/logout'>click to logout</a>");
     }else
@@ -87,7 +87,7 @@ if(email != undefined && password != undefined){
                 // res.send(results[0].email);
             //   const comparision =  bcrypt.compare(password, results[0].password)
               if(email==results[0].email&&password==results[0].password){
-                session=req.session;
+                req.session.id=results[0].id;
                 session=req.query.email;
                res.redirect('/');
                 //   res.send({
