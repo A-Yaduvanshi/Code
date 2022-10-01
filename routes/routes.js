@@ -74,7 +74,7 @@ if(email != undefined && password != undefined){
             //   const comparision =  bcrypt.compare(password, results[0].password)
               if(email===results[0].email&&password===results[0].password){
                 session=req.session;
-                session.userid=email;
+                session.userid=req.query.email;
                res.redirect('/');
                   res.send({
                     "code":200,
