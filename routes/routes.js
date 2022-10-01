@@ -81,7 +81,7 @@ if(email != undefined && password != undefined){
             //   const comparision =  bcrypt.compare(password, results[0].password)
               if(email==results[0].email&&password==results[0].password){
     req.session.userid=results[0].id;
-                res.send(results[0]);
+                // res.send(results[0]);
                res.redirect('/api/jobs');
                 //   res.send({
                 //     "code":200,
