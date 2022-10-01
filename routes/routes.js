@@ -138,7 +138,7 @@ router.get('/jobs_fetch',(req,res)=>{
         con.query("SELECT * FROM `price`)", function (err, result){
             // var data = "{'status':Registration Complete'}";
             
-            res.send(result[0]);
+            res.send(result);
                 // "title":result.title,"desc":result.desc,"price":result.price,"hour":result.hour}); 
         });
 });
