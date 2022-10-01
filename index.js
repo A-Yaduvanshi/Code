@@ -7,7 +7,15 @@ const {connect, con} = require('./mySqlConnect');
 app.use(cors())
 app.use('/api',require('./routes/routes'));
 
-
+//session middleware
+app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false
+}));
+// cookie parser middleware
+app.use(cookieParser());
 connect();
 var session;
 app.get('/', (req, res) => {
