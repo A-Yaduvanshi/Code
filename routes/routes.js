@@ -118,7 +118,7 @@ var upload = multer({
 
    
  // handle single file upload
- router.get('upload', upload.single('image'), (req, res) => {
+ router.get('/upload', upload.single('image'), (req, res) => {
     if (!req.file) {
         res.send("No file upload");
     } else {
@@ -126,8 +126,8 @@ var upload = multer({
         var title=req.body.title;
         var description=req.body.description;
         var imgsrc = 'https://womensafety.cleverapps.io/api/uploads' + req.file.filename
-        var insertData = "INSERT INTO `Blogs`(`id`, `title`, `description`, `image`) VALUES (NULL,?)"
-        con.query(insertData, [title,description,imgsrc], (err, result) => {
+        // var insertData = ""
+        con.query("INSERT INTO `Blogs`(`id`, `title`, `description`, `image`) VALUES (NULL,'"+title+"','"+description+"','"+imgsrc+"')", (err, result) => {
             if (err) throw err
             res.send("data uploade")
         })
