@@ -79,6 +79,8 @@ if(email != undefined && password != undefined){
                     "code":200,
                     "success":"login sucessfull",
                     "name":results[0].name,
+                    "email":results[0].email,
+                    "mobile":results[0].mobile,
                                   });
                 }
             else{
