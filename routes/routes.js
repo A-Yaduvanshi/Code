@@ -5,6 +5,7 @@ const {connect, con} = require('../mySqlConnect');
 // var uuid = require("uuid");
 var axios = require('axios');
 const multer= require('multer');
+const path = require('path');
 // const { con } = require('../mySqlConnect');
 
 
@@ -88,27 +89,37 @@ if(email != undefined && password != undefined){
 }
 
 });
- // handle storage using multer
- var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-       cb(null, './uploads');
+//! Use of Multer
+var storage = multer.diskStorage({
+    destination: (req, file, callBack) => {
+        callBack(null, './uploads')     // './public/images/' directory name where save the file
     },
-    filename: function (req, file, cb) {
-       cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
+    filename: (req, file, callBack) => {
+        callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }
- });
- var upload = multer({ storage: storage });
-
+})
+ 
+var upload = multer({
+    storage: storage
+});
 
    
  // handle single file upload
- router.post('/upload-file', upload.single('dataFile'), (req, res, next) => {
-    const file = req.file;
-    if (!file) {
-       return res.status(400).send({ message: 'Please upload a file.' });
+ router.post("/post",  (req, res) => {
+    if (!req.file) {
+        res.send("No file upload");
+    } else {
+        res.send(req.file.filename)
+        var title=req.body.title;
+        var description=req.body.description;
+        var imgsrc = 'https://womensafety.cleverapps.io/api/uploads' + req.file.filename
+        var insertData = "INSERT INTO `Blogs`(`id`, `title`, `description`, `image`) VALUES (NULL,?)"
+        con.query(insertData, [title,description,imgsrc], (err, result) => {
+            if (err) throw err
+            console.log("file uploaded")
+        })
     }
-    return res.send({ message: 'File uploaded successfully.', file });
- });
+});
 
 
 module.exports = router;
