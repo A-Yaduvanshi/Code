@@ -129,7 +129,7 @@ router.get('/jobs',(req,res)=>{
             res.send({"status":"200",
                 "title":title,"desc":desc,"price":price,"hour":hour}); 
         });
-});
+}});
    
  // handle single file upload
  router.get('/upload', upload.single('image'), (req, res) => {
