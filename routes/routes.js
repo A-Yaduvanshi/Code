@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 var mysql = require('mysql');
-const {connect, con} = require('../mysqlConnect');
+const {connect, con} = require('../mysqlConnect.js');
 // var uuid = require("uuid");
 var axios = require('axios');
 // const { con } = require('../mySqlConnect');
