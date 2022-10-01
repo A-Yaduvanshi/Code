@@ -61,20 +61,20 @@ if(email != undefined && password != undefined){
             })
           }else{
             if(results.length >0){
-                res.send(results[0].password);
+                // res.send(results[0].password);
             //   const comparision =  bcrypt.compare(password, results[0].password)
-            //   if(comparision){
-            //       res.send({
-            //         "code":200,
-            //         "success":"login sucessfull"
-            //       })
-            //   }
-            //   else{
-            //     res.send({
-            //          "code":204,
-            //          "success":"Email and password does not match"
-            //     })
-            //   }
+              if(password===results[0].password){
+                  res.send({
+                    "code":200,
+                    "success":"login sucessfull"
+                  })
+              }
+              else{
+                res.send({
+                     "code":204,
+                     "success":"Email and password does not match"
+                })
+              }
             }
             else{
               res.send({
