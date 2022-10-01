@@ -41,7 +41,7 @@ router.get('/logout',(req,res) => {
 const oneDay = 1000 * 60 * 60 * 24;
 // cookie parser middleware
 var session;
-router.get('/', (req, res) => {
+router.get('/admin', (req, res) => {
     console.log(req)
     // res.send("hello")
     session=req.session;
@@ -50,6 +50,15 @@ router.get('/', (req, res) => {
     }else
     res.send('session not define')
 })
+router.get('/', (req, res) => {
+    console.log(req)
+    // res.send("hello")
+    session=req.session;
+    if(session.userid){
+        res.send("Welcome User <a href=\'/api/logout'>click to logout</a>");
+    }else
+    res.send('session not define')
+});
 router.get('/login',(req,res)=>{
     var email = req.query.email;
     var password= req.query.password;
