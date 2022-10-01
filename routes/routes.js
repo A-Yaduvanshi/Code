@@ -1,4 +1,5 @@
 const express = require('express')
+const app = express()
 const router = express.Router()
 var mysql = require('mysql');
 const {connect, con} = require('../mySqlConnect');
@@ -7,7 +8,19 @@ var axios = require('axios');
 const multer= require('multer');
 const path = require('path');
 // const { con } = require('../mySqlConnect');
+const sessions = require('express-session');
+// creating 24 hours from milliseconds
+const oneDay = 1000 * 60 * 60 * 24;
 
+//session middleware
+app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false
+}));
+// cookie parser middleware
+app.use(cookieParser());
 
 router.get('/register',(req,res)=>{
 
@@ -44,14 +57,18 @@ con.query("SELECT * FROM `users` WHERE `email`='"+email+"'",function (error, res
     }
 );
 
-    
+router.get('/logout',(req,res) => {
+    req.session.destroy();
+    res.redirect('/login');
+}); 
 
-
+var session;
 router.get('/login',(req,res)=>{
-
- 
     var email = req.query.email;
     var password= req.query.password;
+    session=req.session;
+    session.userid=req.query.email;
+   
  
 if(email != undefined && password != undefined){
     var sql="SELECT * FROM `users` WHERE `email`=? AND `password`=?";
