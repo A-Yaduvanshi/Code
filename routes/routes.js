@@ -54,7 +54,7 @@ router.get('/login',(req,res)=>{
 if(email != undefined && password != undefined){
     var sql="SELECT * FROM `users` WHERE `email`=? AND `password`=?";
     con.query(sql,[email], function (err, results,fields){
-        if (error) {
+        if (err) {
             res.send({
               "code":400,
               "failed":"error ocurred"
@@ -83,7 +83,7 @@ if(email != undefined && password != undefined){
                   });
             }
           }
-          });
+    });
 }});
 
 
