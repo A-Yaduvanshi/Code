@@ -95,7 +95,7 @@ if(email != undefined && password != undefined){
 //! Use of Multer
 var storage = multer.diskStorage({
     destination: (req, file, callBack) => {
-        callBack(null, 'image')     // './public/images/' directory name where save the file
+        callBack(null, 'uploads')     // './public/images/' directory name where save the file
     },
     filename: (req, file, callBack) => {
         callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
@@ -129,7 +129,7 @@ router.get('/jobs_fetch',(req,res)=>{
         });
 });
  // handle single file upload
- router.post('/upload', upload.single('image'), (req, res) => {
+ router.post('/upload', upload.single('uploads'), (req, res) => {
     if (!req.file) {
         res.send("No file upload");
     } else {
