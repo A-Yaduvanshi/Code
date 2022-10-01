@@ -50,7 +50,7 @@ con.query("SELECT * FROM `users` WHERE `email`='"+email+"'",function (error, res
 );
 router.get('/logout',(req,res) => {
     req.session.destroy();
-    res.redirect('/login');
+    res.redirect('/api/login');
 }); 
 const oneDay = 1000 * 60 * 60 * 24;
 // cookie parser middleware
@@ -81,8 +81,8 @@ if(email != undefined && password != undefined){
             //   const comparision =  bcrypt.compare(password, results[0].password)
               if(email==results[0].email&&password==results[0].password){
     req.session.userid=results[0].id;
-                // res.send(results[0]);
-               res.redirect('/api/');
+                res.json({results});
+            //    res.redirect('/api/');
                 //   res.send({
                 //     "code":200,
                 //     // "success":"login sucessfull",
