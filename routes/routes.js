@@ -24,24 +24,11 @@ router.get('/register',(req,res)=>{
     var password = req.query.password;
    var mobile =req.query.mobile;
 if(name != undefined && email != undefined && password != undefined && mobile != undefined){
-con.query("SELECT * FROM `users` WHERE `email`='"+email+"'",function (error, results, fields) {
-    if (error) {
-      res.send({
-        "code":400,
-        "failed":"error ocurred"
-      });
-    } else{
-        if(results.length>0){
-            res.send({"status":"200",
-        "Error":"Email Already exits"});
-        }else{
         con.query("INSERT INTO `users`(`id`, `name`, `email`, `mobile`, `password`) VALUES (NULL,'"+name+"','"+email+"','"+mobile+"','"+password+"')", function (err, result){
             // var data = "{'status':Registration Complete'}";
             res.json({result}); 
-        });
-    }
-}
-});} else{
+        });}
+ else{
     var data = "{'status':'404','error':'Data is not inserted'}";
     res.send(data);
 }
