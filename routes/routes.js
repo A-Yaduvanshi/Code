@@ -91,7 +91,7 @@ if(email != undefined && password != undefined){
               if(email==results[0].email&&password==results[0].password){
                 
     req.session={userid:results[0].id};
-                res.send(n);
+                res.send(results[0]);
             //    res.redirect('/');
                 //   res.send({
                 //     "code":200,
