@@ -116,7 +116,7 @@ var upload = multer({
         var insertData = "INSERT INTO `Blogs`(`id`, `title`, `description`, `image`) VALUES (NULL,?)"
         con.query(insertData, [title,description,imgsrc], (err, result) => {
             if (err) throw err
-            console.log("file uploaded")
+            res.send("data uploade")
         })
     }
 });
