@@ -98,7 +98,7 @@ var storage = multer.diskStorage({
         callBack(null, './uploads')     // './public/images/' directory name where save the file
     },
     filename: (req, file, callBack) => {
-        callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+        callBack(null, file.fieldname + '-' + Date.now() + "--"+file.originalname)
     }
 })
 var upload = multer({
