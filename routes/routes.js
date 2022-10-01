@@ -9,7 +9,7 @@ var axios = require('axios');
 
 router.get('/register',(req,res)=>{
 
-    var name = req.query.full_name;
+    var name = req.query.name;
     var email = req.query.email;
     var password = req.query.password;
    var mobile =req.query.mobile;
