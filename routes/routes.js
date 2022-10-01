@@ -50,25 +50,22 @@ router.get('/logout',(req,res) => {
     res.redirect('/login');
 }); 
 const oneDay = 1000 * 60 * 60 * 24;
+// cookie parser middleware
+app.use(cookieParser());
+
 //session middleware
 app.use(sessions({
-    name:'SessionCookie',
-  genid: function(req) {
-      console.log('session id created');
-    return genuuid();},
     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
     saveUninitialized:true,
     cookie: { maxAge: oneDay },
     resave: false
 }));
-// cookie parser middleware
-app.use(cookieParser());
 
 var session;
 app.get('/', (req, res) => {
     // res.send("hello")
     session=req.session;
-    if(session){
+    if(session.userid){
         res.send("Welcome User <a href=\'/logout'>click to logout</a>");
     }else
     res.send('session not define')
@@ -93,7 +90,7 @@ if(email != undefined && password != undefined){
             //   const comparision =  bcrypt.compare(password, results[0].password)
               if(email==results[0].email&&password==results[0].password){
                 
-    
+    req.session={userid:results[0].id};
                 res.send(n);
             //    res.redirect('/');
                 //   res.send({
