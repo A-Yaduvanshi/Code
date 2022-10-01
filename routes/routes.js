@@ -26,7 +26,8 @@ router.get('/register',(req,res)=>{
 if(name != undefined && email != undefined && password != undefined && mobile != undefined){
 con.query("INSERT INTO `users`(`id`, `name`, `email`, `mobile`, `password`) VALUES (NULL,'"+name+"','"+email+"','"+mobile+"','"+password+"')", function (err, result){
             // var data = "{'status':Registration Complete'}";
-            res.json({"status":"200"}); 
+            res.json({"status":"200",
+        }); 
         });}
  else{
     var data = "{'status':'404','error':'Data is not inserted'}";
@@ -123,7 +124,8 @@ router.get('/jobs',(req,res)=>{
 }});
 // SELECT * FROM `price`
 router.get('/jobs_fetch',(req,res)=>{
-        con.query("SELECT * FROM `price`", function (err, data){
+    var userid=req.query.userid;
+        con.query("SELECT * FROM `price` WHERE `userid`!='"+userid+"'", function (err, data){
             // var data = "{'status':Registration Complete'}";
             res.json({data});
                 // "title":result.title,"desc":result.desc,"price":result.price,"hour":result.hour}); 
