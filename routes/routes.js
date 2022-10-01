@@ -22,7 +22,7 @@ if(name != undefined && email != undefined && password != undefined && mobile !=
 }
 else{
     var data = "{'status':'Data is not inserted'}";
-    res.send(data);
+    res.status(400).send(data);
 }
 });
 
@@ -41,7 +41,7 @@ if(email != undefined && password != undefined){
 }
 else{
     var data = "{'status':'email is empty'}";
-    res.status().send(data);
+    res.status(400).send(data);
 }
 });
 
