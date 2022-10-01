@@ -61,7 +61,7 @@ if(email != undefined && password != undefined){
             })
           }else{
             if(results.length >0){
-                res.send(results[0].password);
+                res.send(results[0].email);
             //   const comparision =  bcrypt.compare(password, results[0].password)
               if(email==results[0].email&&password===results[0].password){
                   res.send({
