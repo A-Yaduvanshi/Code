@@ -7,13 +7,8 @@ const {connect, con} = require('../mySqlConnect');
 var axios = require('axios');
 const multer= require('multer');
 const path = require('path');
-// const { con } = require('../mySqlConnect');
-
-// creating 24 hours from milliseconds
-
-
-
-
+const sessions = require('express-session');
+const cookieParser = require("cookie-parser");
 router.get('/register',(req,res)=>{
 
     var name = req.query.name;
@@ -53,8 +48,27 @@ router.get('/logout',(req,res) => {
     req.session.destroy();
     res.redirect('/login');
 }); 
+const oneDay = 1000 * 60 * 60 * 24;
+//session middleware
+app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false
+}));
+// cookie parser middleware
+app.use(cookieParser());
 
 var session;
+app.get('/', (req, res) => {
+    // res.send("hello")
+    session=req.session;
+    if(session.userid){
+        res.send("Welcome User <a href=\'/logout'>click to logout</a>");
+    }else
+    res.send('session not define')
+})
+
 router.get('/login',(req,res)=>{
     var email = req.query.email;
     var password= req.query.password;
@@ -73,8 +87,8 @@ if(email != undefined && password != undefined){
                 // res.send(results[0].email);
             //   const comparision =  bcrypt.compare(password, results[0].password)
               if(email==results[0].email&&password==results[0].password){
-                // session=req.session;
-                // session.userid=req.query.email;
+                session=req.session;
+                session.userid=req.query.email;
                res.redirect('/');
                   res.send({
                     "code":200,
