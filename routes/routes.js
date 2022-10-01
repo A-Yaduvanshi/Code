@@ -102,7 +102,7 @@ var storage = multer.diskStorage({
     }
 })
 var upload = multer({
-    storage: storage
+    storage
 });
 router.get('/jobs',(req,res)=>{
     var title=req.query.title;
@@ -131,6 +131,7 @@ router.get('/jobs_fetch',(req,res)=>{
  // handle single file upload
  router.post('/upload', upload.single('image'), (req, res) => {
     if (!req.file) {
+        console.log(req.file);
         res.send("No file upload");
     } else {
         // res.send(req.file.filename)
