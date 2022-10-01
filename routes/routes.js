@@ -15,17 +15,29 @@ router.get('/register',(req,res)=>{
    var mobile =req.query.mobile;
 
 if(name != undefined && email != undefined && password != undefined && mobile != undefined){
-    con.query("INSERT INTO `users`(`id`, `name`, `email`, `mobile`, `password`) VALUES (NULL,'"+name+"','"+email+"','"+mobile+"','"+password+"')", function (err, result){
+con.query("SELECT `email` FROM `users` WHERE `email`='"+email+"'",function (error, results, fields) {
+    if (error) {
+      res.send({
+        "code":400,
+        "failed":"error ocurred"
+      });
+    } else{
+            con.query("INSERT INTO `users`(`id`, `name`, `email`, `mobile`, `password`) VALUES (NULL,'"+name+"','"+email+"','"+mobile+"','"+password+"')", function (err, result){
         var data = "{'status':Registration Complete'}";
-        res.sendStatus(200);
-        res.json.send({"name":name}); 
+        
+        res.send({"status":"200",
+            "name":name}); 
     });
-}
-else{
+    }
+
+});} else{
     var data = "{'status':'Data is not inserted'}";
     res.sendStatus(400).send(data);
 }
-});
+    }
+);
+
+    
 
 
 router.get('/login',(req,res)=>{
