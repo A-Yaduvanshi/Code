@@ -44,12 +44,10 @@ var session;
 router.get('/admin', (req, res) => {
     console.log(req)
     // res.send("hello")
-    session=req.session;
-    if(session.userid){
-        res.send("Welcome User <a href=\'/api/logout'>click to logout</a>");
-    }else
-    res.send('session not define')
-})
+        res.sendFile("");
+   
+});
+// Root Directory
 router.get('/', (req, res) => {
     console.log(req)
     // res.send("hello")
@@ -59,6 +57,7 @@ router.get('/', (req, res) => {
     }else
     res.send('session not define')
 });
+//////// User Login Api
 router.get('/login',(req,res)=>{
     var email = req.query.email;
     var password= req.query.password;
@@ -121,8 +120,6 @@ router.get('/jobs',(req,res)=>{
     var price=req.query.price;
     var hour=req.query.hour;
     // var userid=session.userid;
-    session=req.session;
-    if(session.userid){
     if(title != undefined && desc != undefined && price != undefined && hour != undefined){
         con.query("INSERT INTO `price`(`id`, `title`, `description`, `price`, `hour`,`userid`) VALUES (NULL,'"+title+"','"+desc+"','"+price+"','"+hour+"','"+session.userid+"')", function (err, result){
             // var data = "{'status':Registration Complete'}";
@@ -131,7 +128,7 @@ router.get('/jobs',(req,res)=>{
         });
 }else{
     res.send({"status":'404'});
-}}});
+}});
 // SELECT * FROM `price`
 router.get('/jobs_fetch',(req,res)=>{
         con.query("SELECT * FROM `price`", function (err, data){
@@ -156,6 +153,21 @@ router.get('/jobs_fetch',(req,res)=>{
         })
     }
 });
-router.get
+
+/// SoS data upload api 
+router.post('/sos',(req,res)=>{
+var name=req.query.name;
+var mobile=req.query.mobile;
+var userid=req.query.userid;
+if (name!=undefined&&mobile!=undefined&&userid!=undefined) {
+    con.query("INSERT INTO `SOS` (`id`, `name`, `mobile`, `userid`) VALUES (NULL, '"+name+"', '"+mobile+"', '"+userid+"');",function(err,result){
+        res.json({"status":"200"});
+        })  ;
+} else {
+    res.json({result:"Data is not inserted"});
+}
+});
+router.get()
 module.exports = router;
 // "INSERT INTO `price`(`id`, `title`, `description`, `price`, `hour`) VALUES (NULL,'"+title+"','"+desc+"','"+price+"','"+hour+"')"
+// INSERT INTO `SOS` (`id`, `name`, `mobile`, `userid`) VALUES (NULL, 'Deepak', '8588980323', '31');
