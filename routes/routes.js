@@ -90,13 +90,13 @@ if(email != undefined && password != undefined){
                 session=req.session;
                 session.id=req.query.email;
                res.redirect('/');
-                  res.send({
-                    "code":200,
-                    // "success":"login sucessfull",
-                    "name":results[0].name,
-                    "email":results[0].email,
-                    "mobile":results[0].mobile,
-                                  });
+                //   res.send({
+                //     "code":200,
+                //     // "success":"login sucessfull",
+                //     "name":results[0].name,
+                //     "email":results[0].email,
+                //     "mobile":results[0].mobile,
+                //                   });
                 }
             else{
                 res.send({
