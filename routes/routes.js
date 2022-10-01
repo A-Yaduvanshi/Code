@@ -102,7 +102,7 @@ var storage = multer.diskStorage({
     }
 })
 var upload = multer({
-    storage
+    storage:storage
 });
 router.get('/jobs',(req,res)=>{
     var title=req.query.title;
