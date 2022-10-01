@@ -76,14 +76,6 @@ if(email != undefined && password != undefined){
               if(email==results[0].email&&password==results[0].password){
     req.session.userid=results[0].id;
                 res.json({results});
-            //    res.redirect('/api/');
-                //   res.send({
-                //     "code":200,
-                //     // "success":"login sucessfull",
-                //     "name":results[0].name,
-                //     "email":results[0].email,
-                //     "mobile":results[0].mobile,
-                //                   });
                 }
             else{
                 res.send({
