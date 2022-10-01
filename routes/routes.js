@@ -95,7 +95,7 @@ if(email != undefined && password != undefined){
 //! Use of Multer
 var storage = multer.diskStorage({
     destination: (req, file, callBack) => {
-        callBack(null, 'uploads')     // './public/images/' directory name where save the file
+        callBack(null, 'image')     // './public/images/' directory name where save the file
     },
     filename: (req, file, callBack) => {
         callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
@@ -129,14 +129,14 @@ router.get('/jobs_fetch',(req,res)=>{
         });
 });
  // handle single file upload
- router.post('/upload', upload.single('uploads'), (req, res) => {
+ router.post('/upload', upload.single('image'), (req, res) => {
     if (!req.file) {
         res.send("No file upload");
     } else {
         // res.send(req.file.filename)
         var title=req.body.title;
         var description=req.body.description;
-        var imgsrc = 'https://womensafety.cleverapps.io/api/uploads' + req.file.filename
+        var imgsrc = 'https://womensafety.cleverapps.io/api/uploads/' + req.file.filename
         // var insertData = ""
         con.query("INSERT INTO `Blogs`(`id`, `title`, `description`, `image`) VALUES (NULL,'"+title+"','"+description+"','"+imgsrc+"')", (err, result) => {
             if (err) throw err
