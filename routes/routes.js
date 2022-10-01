@@ -26,7 +26,7 @@ router.get('/register',(req,res)=>{
 if(name != undefined && email != undefined && password != undefined && mobile != undefined){
 con.query("INSERT INTO `users`(`id`, `name`, `email`, `mobile`, `password`) VALUES (NULL,'"+name+"','"+email+"','"+mobile+"','"+password+"')", function (err, result){
             // var data = "{'status':Registration Complete'}";
-            res.json({"status":"200","name":name,"email":email,"mobile":mobile
+            res.json.send({result:"200","name":name,"email":email,"mobile":mobile
         }); 
         });}
  else{
