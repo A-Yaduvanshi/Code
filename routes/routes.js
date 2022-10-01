@@ -37,8 +37,7 @@ con.query("SELECT * FROM `users` WHERE `email`='"+email+"'",function (error, res
         }else{
         con.query("INSERT INTO `users`(`id`, `name`, `email`, `mobile`, `password`) VALUES (NULL,'"+name+"','"+email+"','"+mobile+"','"+password+"')", function (err, result){
             // var data = "{'status':Registration Complete'}";
-            res.send({"status":"200",
-                "name":name,"email":email,"mobile":mobile}); 
+            res.json({result}); 
         });
     }
 }
