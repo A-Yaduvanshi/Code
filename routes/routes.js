@@ -15,20 +15,25 @@ router.get('/register',(req,res)=>{
    var mobile =req.query.mobile;
 
 if(name != undefined && email != undefined && password != undefined && mobile != undefined){
-con.query("SELECT `email` FROM `users` WHERE `email`='"+email+"'",function (error, results, fields) {
+con.query("SELECT * FROM `users` WHERE `email`='"+email+"'",function (error, results, fields) {
     if (error) {
       res.send({
         "code":400,
         "failed":"error ocurred"
       });
     } else{
-            con.query("INSERT INTO `users`(`id`, `name`, `email`, `mobile`, `password`) VALUES (NULL,'"+name+"','"+email+"','"+mobile+"','"+password+"')", function (err, result){
-        var data = "{'status':Registration Complete'}";
-        
-        res.send({"status":"200",
-            "name":name}); 
-    });
+        if(results.length>0){
+            res.send({"status":"200",
+        "Error":"Email Already exits"});
+        }else{
+        con.query("INSERT INTO `users`(`id`, `name`, `email`, `mobile`, `password`) VALUES (NULL,'"+name+"','"+email+"','"+mobile+"','"+password+"')", function (err, result){
+            // var data = "{'status':Registration Complete'}";
+            
+            res.send({"status":"200",
+                "name":name,"email":email,"mobile":mobile}); 
+        });
     }
+}
 
 });} else{
     var data = "{'status':'Data is not inserted'}";
