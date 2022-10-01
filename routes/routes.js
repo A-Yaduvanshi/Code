@@ -163,7 +163,7 @@ router.get('/jobs_fetch',(req,res)=>{
         });
 });
  // handle single file upload
- router.post('/upload', upload.single('uploads'), (req, res) => {
+ router.post('/upload', upload.single('upload'), (req, res) => {
     if (!req.file) {
         res.send("No file upload");
     } else {
