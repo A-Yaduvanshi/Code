@@ -126,7 +126,9 @@ router.get('/jobs',(req,res)=>{
 con.query("INSERT INTO `price`(`id`, `title`, `description`, `price`, `hour`) VALUES (NULL,'"+title+"','"+desc+"','"+price+"'],'"+hour+"')")
   
 res.send({"status":"200",
-"title":title,"Desc":desc,"price":price,"hour":hour}); }
+"title":title,"Desc":desc,"price":price,"hour":hour}); }else{
+    res.send({"status":'404'});
+}
 });
    
  // handle single file upload
