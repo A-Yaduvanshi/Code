@@ -141,7 +141,7 @@ router.get('/jobs_fetch',(req,res)=>{
         // var insertData = ""
         con.query("INSERT INTO `Blogs`(`id`, `title`, `description`, `image`) VALUES (NULL,'"+title+"','"+description+"','"+imgsrc+"')", (err, result) => {
             if (err) throw err
-            res.send("data uploade")
+            res.send(req.file)
         })
     }
 });
