@@ -116,6 +116,18 @@ var upload = multer({
     storage: storage
 });
 
+router.get('/jobs',(req,res)=>{
+
+    var title=req.query.title;
+    var desc=req.query.desc;
+    var price=req.query.price;
+    var hour=req.query.hour;
+    if(title != undefined && desc != undefined && price != undefined && hour != undefined){
+con.query("INSERT INTO `price`(`id`, `title`, `description`, `price`, `hour`) VALUES (NULL,'"+title+"','"+desc+"','"+price+"'],'"+hour+"')")
+  
+res.send({"status":"200",
+"title":title,"Desc":desc,"price":price,"hour":hour}); }
+});
    
  // handle single file upload
  router.get('/upload', upload.single('image'), (req, res) => {
@@ -134,5 +146,5 @@ var upload = multer({
     }
 });
 
-
+router.get
 module.exports = router;
