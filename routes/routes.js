@@ -46,9 +46,7 @@ var session;
 //     console.log(req)
 //     // res.send("hello")
 //         // res.sendFile("");
-   
 // });
-
 router.get('/', (req, res) => {
     console.log(req)
     // res.send("hello")
@@ -58,7 +56,6 @@ router.get('/', (req, res) => {
     }else
     res.send('session not define')
 });
-
 router.get('/login',(req,res)=>{
     var email = req.query.email;
     var password= req.query.password;
@@ -147,7 +144,6 @@ router.get('/jobs_fetch',(req,res)=>{
         })
     }
 });
-
 /// SoS data upload api 
 router.post('/sos',(req,res)=>{
 var name=req.query.name;
@@ -161,7 +157,13 @@ if (name!=undefined&&mobile!=undefined&&userid!=undefined) {
     res.json({result:"Data is not inserted"});
 }
 });
-
+/// SoS data upload api 
+router.get('/ngo',(req,res)=>{
+        con.query("SELECT * FROM `ngo`",function(err,result){
+            res.json({result});
+        })  ;
+    }
+);
 module.exports = router;
 // "INSERT INTO `price`(`id`, `title`, `description`, `price`, `hour`) VALUES (NULL,'"+title+"','"+desc+"','"+price+"','"+hour+"')"
 // INSERT INTO `SOS` (`id`, `name`, `mobile`, `userid`) VALUES (NULL, 'Deepak', '8588980323', '31');
