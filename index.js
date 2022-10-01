@@ -6,7 +6,8 @@ const {connect, con} = require('./mySqlConnect');
 
 app.use(cors())
 app.use('/api',require('./routes/routes'));
-
+const sessions = require('express-session');
+const cookieParser = require("cookie-parser");
 //session middleware
 app.use(sessions({
     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
