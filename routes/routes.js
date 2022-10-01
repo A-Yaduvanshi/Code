@@ -9,7 +9,7 @@ const multer= require('multer');
 const path = require('path');
 const sessions = require('express-session');
 const cookieParser = require("cookie-parser");
-var genuuid=require('uuid/v4');
+var genuuid=require('uuid');
 router.get('/register',(req,res)=>{
 
     var name = req.query.name;
