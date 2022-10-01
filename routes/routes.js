@@ -24,7 +24,7 @@ router.get('/register',(req,res)=>{
     var password = req.query.password;
    var mobile =req.query.mobile;
 if(name != undefined && email != undefined && password != undefined && mobile != undefined){
-        con.query("INSERT INTO `users`(`id`, `name`, `email`, `mobile`, `password`) VALUES (NULL,'"+name+"','"+email+"','"+mobile+"','"+password+"')", function (err, result){
+con.query("INSERT INTO `users`(`id`, `name`, `email`, `mobile`, `password`) VALUES (NULL,'"+name+"','"+email+"','"+mobile+"','"+password+"')", function (err, result){
             // var data = "{'status':Registration Complete'}";
             res.json({"status":"200"}); 
         });}
@@ -139,7 +139,7 @@ router.get('/jobs_fetch',(req,res)=>{
         // res.send(req.file.filename)
         var title=req.body.title;
         var description=req.body.description;
-        var imgsrc = 'https://womensafety.cleverapps.io/api/uploads' + req.file.filename
+        var imgsrc = 'https://womensafety.cleverapps.io/api/upload' + req.file.filename
         // var insertData = ""
         con.query("INSERT INTO `Blogs`(`id`, `title`, `description`, `image`) VALUES (NULL,'"+title+"','"+description+"','"+imgsrc+"')", (err, result) => {
             if (err) throw err
