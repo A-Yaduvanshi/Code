@@ -10,6 +10,15 @@ const path = require('path');
 const sessions = require('express-session');
 const cookieParser = require("cookie-parser");
 var genuuid=require('uuid');
+router.use(cookieParser());
+
+//session middleware
+router.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    // saveUninitialized:true,
+    // cookie: { maxAge: oneDay },
+    // resave: false
+}));
 router.get('/register',(req,res)=>{
 
     var name = req.query.name;
@@ -51,18 +60,10 @@ router.get('/logout',(req,res) => {
 }); 
 const oneDay = 1000 * 60 * 60 * 24;
 // cookie parser middleware
-app.use(cookieParser());
-
-//session middleware
-app.use(sessions({
-    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-    saveUninitialized:true,
-    cookie: { maxAge: oneDay },
-    resave: false
-}));
 
 var session;
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
+    console.log(req)
     // res.send("hello")
     session=req.session;
     if(session.userid){
