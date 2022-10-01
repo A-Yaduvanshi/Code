@@ -9,6 +9,7 @@ const multer= require('multer');
 const path = require('path');
 const sessions = require('express-session');
 const cookieParser = require("cookie-parser");
+var genuuid=require('uuid/v4');
 router.get('/register',(req,res)=>{
 
     var name = req.query.name;
@@ -51,6 +52,10 @@ router.get('/logout',(req,res) => {
 const oneDay = 1000 * 60 * 60 * 24;
 //session middleware
 app.use(sessions({
+    name:'SessionCookie',
+  genid: function(req) {
+      console.log('session id created');
+    return genuuid();},
     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
     saveUninitialized:true,
     cookie: { maxAge: oneDay },
@@ -62,7 +67,7 @@ app.use(cookieParser());
 var session;
 app.get('/', (req, res) => {
     // res.send("hello")
-    session=req.session.id;
+    session=req.session;
     if(session){
         res.send("Welcome User <a href=\'/logout'>click to logout</a>");
     }else
@@ -87,9 +92,10 @@ if(email != undefined && password != undefined){
                 // res.send(results[0].email);
             //   const comparision =  bcrypt.compare(password, results[0].password)
               if(email==results[0].email&&password==results[0].password){
-                req.session.id=results[0].id;
-                session=req.query.email;
-               res.redirect('/');
+                req.session.username=email;
+                var name=req.session.username;
+                res.send(name);
+            //    res.redirect('/');
                 //   res.send({
                 //     "code":200,
                 //     // "success":"login sucessfull",
