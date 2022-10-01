@@ -121,7 +121,7 @@ router.get('/jobs',(req,res)=>{
     var hour=req.query.hour;
     var userid= req.query.userid;
     if(title != undefined && desc != undefined && price != undefined && hour != undefined){
-        con.query("INSERT INTO `price`(`id`, `title`, `description`, `price`, `hour`,`userid`) VALUES (NULL,'"+title+"','"+desc+"','"+price+"','"+hour+"','"+session.userid+"')", function (err, result){
+        con.query("INSERT INTO `price`(`id`, `title`, `description`, `price`, `hour`,`userid`) VALUES (NULL,'"+title+"','"+desc+"','"+price+"','"+hour+"','"+userid+"')", function (err, result){
             // var data = "{'status':Registration Complete'}";
             res.send({"status":"200",
                 "title":title,"desc":desc,"price":price,"hour":hour}); 
