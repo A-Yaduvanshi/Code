@@ -10,7 +10,7 @@ const path = require('path');
 // const { con } = require('../mySqlConnect');
 
 // creating 24 hours from milliseconds
-const oneDay = 1000 * 60 * 60 * 24;
+
 
 
 
@@ -58,8 +58,8 @@ var session;
 router.get('/login',(req,res)=>{
     var email = req.query.email;
     var password= req.query.password;
-    // session=req.session;
-    // session.userid=req.query.email;
+    session=req.session;
+    session.userid=req.query.email;
    
  
 if(email != undefined && password != undefined){
