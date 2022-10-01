@@ -41,7 +41,7 @@ if(email != undefined && password != undefined){
 }
 else{
     var data = "{'status':'email is empty'}";
-    res.status.send(data);
+    res.status().send(data);
 }
 });
 
