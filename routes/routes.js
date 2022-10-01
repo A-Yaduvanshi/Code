@@ -60,7 +60,7 @@ router.get('/', (req, res) => {
     // res.send("hello")
     session=req.session;
     if(session.userid){
-        res.send("Welcome User <a href=\'/logout'>click to logout</a>");
+        res.send("Welcome User <a href=\'/api/logout'>click to logout</a>");
     }else
     res.send('session not define')
 })
