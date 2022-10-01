@@ -36,8 +36,8 @@ con.query("SELECT * FROM `users` WHERE `email`='"+email+"'",function (error, res
 }
 
 });} else{
-    var data = "{'status':'Data is not inserted'}";
-    res.sendStatus(400).send(data);
+    var data = "{'status':'404','error':'Data is not inserted'}";
+    res.send(data);
 }
     }
 );
@@ -53,15 +53,38 @@ router.get('/login',(req,res)=>{
  
 if(email != undefined && password != undefined){
     var sql="SELECT * FROM `users` WHERE `email`=? AND `password`=?";
-    con.query(sql,[email,password], function (err, result){
-       res.sendStatus(200).send("User Login"); 
-    });
-}
-else{
-    var data = "{'status':'email is empty'}";
-    res.sendStatus(400).send(data);
-}
-});
+    con.query(sql,[email], function (err, results,fields){
+        if (error) {
+            res.send({
+              "code":400,
+              "failed":"error ocurred"
+            })
+          }else{
+            if(results.length >0){
+                res.send(results[0].password);
+            //   const comparision =  bcrypt.compare(password, results[0].password)
+            //   if(comparision){
+            //       res.send({
+            //         "code":200,
+            //         "success":"login sucessfull"
+            //       })
+            //   }
+            //   else{
+            //     res.send({
+            //          "code":204,
+            //          "success":"Email and password does not match"
+            //     })
+            //   }
+            }
+            else{
+              res.send({
+                "code":206,
+                "success":"Email does not exits"
+                  });
+            }
+          }
+          });
+}});
 
 
 module.exports = router;
