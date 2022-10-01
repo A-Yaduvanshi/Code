@@ -165,7 +165,7 @@ router.get('/jobs_fetch',(req,res)=>{
     if (!req.file) {
         res.send("No file upload");
     } else {
-        res.send(req.file.filename)
+        // res.send(req.file.filename)
         var title=req.body.title;
         var description=req.body.description;
         var imgsrc = 'https://womensafety.cleverapps.io/api/uploads' + req.file.filename
