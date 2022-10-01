@@ -11,7 +11,6 @@ const sessions = require('express-session');
 const cookieParser = require("cookie-parser");
 var genuuid=require('uuid');
 router.use(cookieParser());
-
 //session middleware
 router.use(sessions({
     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
@@ -20,12 +19,10 @@ router.use(sessions({
     // resave: false
 }));
 router.get('/register',(req,res)=>{
-
     var name = req.query.name;
     var email = req.query.email;
     var password = req.query.password;
    var mobile =req.query.mobile;
-
 if(name != undefined && email != undefined && password != undefined && mobile != undefined){
 con.query("SELECT * FROM `users` WHERE `email`='"+email+"'",function (error, results, fields) {
     if (error) {
@@ -40,27 +37,23 @@ con.query("SELECT * FROM `users` WHERE `email`='"+email+"'",function (error, res
         }else{
         con.query("INSERT INTO `users`(`id`, `name`, `email`, `mobile`, `password`) VALUES (NULL,'"+name+"','"+email+"','"+mobile+"','"+password+"')", function (err, result){
             // var data = "{'status':Registration Complete'}";
-            
             res.send({"status":"200",
                 "name":name,"email":email,"mobile":mobile}); 
         });
     }
 }
-
 });} else{
     var data = "{'status':'404','error':'Data is not inserted'}";
     res.send(data);
 }
     }
 );
-
 router.get('/logout',(req,res) => {
     req.session.destroy();
     res.redirect('/login');
 }); 
 const oneDay = 1000 * 60 * 60 * 24;
 // cookie parser middleware
-
 var session;
 router.get('/', (req, res) => {
     console.log(req)
@@ -71,12 +64,9 @@ router.get('/', (req, res) => {
     }else
     res.send('session not define')
 })
-
 router.get('/login',(req,res)=>{
     var email = req.query.email;
     var password= req.query.password;
-   
- 
 if(email != undefined && password != undefined){
     var sql="SELECT * FROM `users` WHERE `email`=? AND `password`=?";
     con.query(sql,[email,password], function (err, results,fields){
@@ -90,10 +80,9 @@ if(email != undefined && password != undefined){
                 // res.send(results[0].email);
             //   const comparision =  bcrypt.compare(password, results[0].password)
               if(email==results[0].email&&password==results[0].password){
-                
     req.session.userid=results[0].id;
                 res.send(results[0]);
-            //    res.redirect('/');
+               res.redirect('/api/jobs');
                 //   res.send({
                 //     "code":200,
                 //     // "success":"login sucessfull",
@@ -118,7 +107,6 @@ if(email != undefined && password != undefined){
           }
     });
 }
-
 });
 //! Use of Multer
 var storage = multer.diskStorage({
@@ -129,13 +117,10 @@ var storage = multer.diskStorage({
         callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }
 })
- 
 var upload = multer({
     storage: storage
 });
-
 router.get('/jobs',(req,res)=>{
-
     var title=req.query.title;
     var desc=req.query.desc;
     var price=req.query.price;
@@ -143,11 +128,9 @@ router.get('/jobs',(req,res)=>{
     var userid=session.userid;
     session=req.session;
     if(session.userid){
-
     if(title != undefined && desc != undefined && price != undefined && hour != undefined){
         con.query("INSERT INTO `price`(`id`, `title`, `description`, `price`, `hour`,`userid`) VALUES (NULL,'"+title+"','"+desc+"','"+price+"','"+hour+"','"+userid+"')", function (err, result){
             // var data = "{'status':Registration Complete'}";
-            
             res.send({"status":"200",
                 "title":title,"desc":desc,"price":price,"hour":hour}); 
         });
@@ -156,10 +139,8 @@ router.get('/jobs',(req,res)=>{
 }}});
 // SELECT * FROM `price`
 router.get('/jobs_fetch',(req,res)=>{
-
         con.query("SELECT * FROM `price`", function (err, data){
             // var data = "{'status':Registration Complete'}";
-            
             res.json({data});
                 // "title":result.title,"desc":result.desc,"price":result.price,"hour":result.hour}); 
         });
@@ -180,7 +161,6 @@ router.get('/jobs_fetch',(req,res)=>{
         })
     }
 });
-
 router.get
 module.exports = router;
 // "INSERT INTO `price`(`id`, `title`, `description`, `price`, `hour`) VALUES (NULL,'"+title+"','"+desc+"','"+price+"','"+hour+"')"
