@@ -105,7 +105,7 @@ var upload = multer({
 
    
  // handle single file upload
- router.post("/post", upload.single('image'), (req, res) => {
+ router.get('upload', upload.single('image'), (req, res) => {
     if (!req.file) {
         res.send("No file upload");
     } else {
