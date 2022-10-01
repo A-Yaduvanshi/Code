@@ -129,6 +129,8 @@ router.get('/jobs',(req,res)=>{
             res.send({"status":"200",
                 "title":title,"desc":desc,"price":price,"hour":hour}); 
         });
+}else{
+    res.send({"status":'404'});
 }});
 // SELECT * FROM `price`
 router.get('/jobs_fetch',(req,res)=>{
@@ -136,8 +138,8 @@ router.get('/jobs_fetch',(req,res)=>{
         con.query("SELECT * FROM `price`)", function (err, result){
             // var data = "{'status':Registration Complete'}";
             
-            res.send({"status":"200",
-                "title":title,"desc":desc,"price":price,"hour":hour}); 
+            res.send({"status":"200"});
+                // "title":result.title,"desc":result.desc,"price":result.price,"hour":result.hour}); 
         });
 });
  // handle single file upload
