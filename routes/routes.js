@@ -17,12 +17,12 @@ router.get('/register',(req,res)=>{
 if(name != undefined && email != undefined && password != undefined && mobile != undefined){
     con.query("INSERT INTO `users`(`id`, `name`, `email`, `mobile`, `password`) VALUES (NULL,'"+name+"','"+email+"','"+mobile+"','"+password+"')", function (err, result){
         var data = "{'status':Registration Complete'}";
-        res.status(200).send("Registration Complete"); 
+        res.sendStatus(200).send("Registration Complete"); 
     });
 }
 else{
     var data = "{'status':'Data is not inserted'}";
-    res.status(400).send(data);
+    res.sendStatus(400).send(data);
 }
 });
 
@@ -36,12 +36,12 @@ router.get('/login',(req,res)=>{
 if(email != undefined && password != undefined){
     var sql="SELECT * FROM `users` WHERE `email`=? AND `password`=?";
     con.query(sql,[email,password], function (err, result){
-       res.status(200).send("User Login"); 
+       res.sendStatus(200).send("User Login"); 
     });
 }
 else{
     var data = "{'status':'email is empty'}";
-    res.status(400).send(data);
+    res.sendStatus(400).send(data);
 }
 });
 
