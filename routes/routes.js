@@ -93,7 +93,7 @@ if(email != undefined && password != undefined){
             //   const comparision =  bcrypt.compare(password, results[0].password)
               if(email==results[0].email&&password==results[0].password){
                 
-                var name=req.session.result[0].email;
+                var name=req.session.results[0].email;
                 res.send(name);
             //    res.redirect('/');
                 //   res.send({
