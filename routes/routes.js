@@ -58,8 +58,6 @@ var session;
 router.get('/login',(req,res)=>{
     var email = req.query.email;
     var password= req.query.password;
-    // session=req.session;
-    // session.userid=req.query.email;
    
  
 if(email != undefined && password != undefined){
@@ -75,6 +73,9 @@ if(email != undefined && password != undefined){
                 // res.send(results[0].email);
             //   const comparision =  bcrypt.compare(password, results[0].password)
               if(email===results[0].email&&password===results[0].password){
+                session=req.session;
+                session.userid=email;
+               
                   res.send({
                     "code":200,
                     // "success":"login sucessfull",
