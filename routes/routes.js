@@ -8,19 +8,11 @@ var axios = require('axios');
 const multer= require('multer');
 const path = require('path');
 // const { con } = require('../mySqlConnect');
-const sessions = require('express-session');
+
 // creating 24 hours from milliseconds
 const oneDay = 1000 * 60 * 60 * 24;
 
-//session middleware
-app.use(sessions({
-    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-    saveUninitialized:true,
-    cookie: { maxAge: oneDay },
-    resave: false
-}));
-// cookie parser middleware
-app.use(cookieParser());
+
 
 router.get('/register',(req,res)=>{
 
@@ -85,8 +77,9 @@ if(email != undefined && password != undefined){
               if(email===results[0].email&&password===results[0].password){
                   res.send({
                     "code":200,
-                    "success":"login sucessfull"
-                  });
+                    "success":"login sucessfull",
+                    "name":results[0].name,
+                                  });
                 }
             else{
                 res.send({
