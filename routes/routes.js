@@ -4,6 +4,7 @@ var mysql = require('mysql');
 const {connect, con} = require('../mySqlConnect');
 // var uuid = require("uuid");
 var axios = require('axios');
+const multer= require('multer');
 // const { con } = require('../mySqlConnect');
 
 
@@ -87,6 +88,27 @@ if(email != undefined && password != undefined){
 }
 
 });
+ // handle storage using multer
+ var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+       cb(null, './uploads');
+    },
+    filename: function (req, file, cb) {
+       cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
+    }
+ });
+ var upload = multer({ storage: storage });
+
+
+   
+ // handle single file upload
+ router.post('/upload-file', upload.single('dataFile'), (req, res, next) => {
+    const file = req.file;
+    if (!file) {
+       return res.status(400).send({ message: 'Please upload a file.' });
+    }
+    return res.send({ message: 'File uploaded successfully.', file });
+ });
 
 
 module.exports = router;
