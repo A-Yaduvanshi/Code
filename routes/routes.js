@@ -123,12 +123,12 @@ router.get('/jobs',(req,res)=>{
     var price=req.query.price;
     var hour=req.query.hour;
     if(title != undefined && desc != undefined && price != undefined && hour != undefined){
-con.query("INSERT INTO `price`(`id`, `title`, `description`, `price`, `hour`) VALUES (NULL,'"+title+"','"+desc+"','"+price+"'],'"+hour+"')")
-  
-res.send({"status":"200",
-"title":title,"Desc":desc,"price":price,"hour":hour}); }else{
-    res.send({"status":'404'});
-}
+        con.query("INSERT INTO `price`(`id`, `title`, `description`, `price`, `hour`) VALUES (NULL,'"+title+"','"+desc+"','"+price+"','"+hour+"')", function (err, result){
+            // var data = "{'status':Registration Complete'}";
+            
+            res.send({"status":"200",
+                "title":title,"desc":desc,"price":price,"hour":hour}); 
+        });
 });
    
  // handle single file upload
@@ -150,3 +150,4 @@ res.send({"status":"200",
 
 router.get
 module.exports = router;
+// "INSERT INTO `price`(`id`, `title`, `description`, `price`, `hour`) VALUES (NULL,'"+title+"','"+desc+"','"+price+"','"+hour+"')"
