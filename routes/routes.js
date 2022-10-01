@@ -27,19 +27,21 @@ else{
 });
 
 
-router.get('/show_email',(req,res)=>{
+router.get('/login',(req,res)=>{
 
  
     var email = req.query.email;
+    var password= req.query.password;
  
-if(email != undefined){
-    con.query("SELECT * FROM `registration` WHERE `email` = '"+email+"'", function (err, result){
-       res.send(result); 
+if(email != undefined && password != undefined){
+    var sql="SELECT * FROM `users` WHERE `email`=? AND `password`=?";
+    con.query(sql,[email,password], function (err, result){
+       res.status.send("User Login"); 
     });
 }
 else{
     var data = "{'status':'email is empty'}";
-    res.send(data);
+    res.status.send(data);
 }
 });
 
