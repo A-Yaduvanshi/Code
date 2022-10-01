@@ -95,7 +95,7 @@ if(email != undefined && password != undefined){
 //! Use of Multer
 var storage = multer.diskStorage({
     destination: (req, file, callBack) => {
-        callBack(null, '../uploads')     // './public/images/' directory name where save the file
+        callBack(null, './uploads')     // './public/images/' directory name where save the file
     },
     filename: (req, file, callBack) => {
         callBack(null, file.fieldname + '-' + Date.now() + "--"+file.originalname)
