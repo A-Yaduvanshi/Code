@@ -135,7 +135,7 @@ router.get('/jobs',(req,res)=>{
 // SELECT * FROM `price`
 router.get('/jobs_fetch',(req,res)=>{
 
-        con.query("SELECT * FROM `price`)", function (err, result){
+        con.query("SELECT * FROM `price`", function (err, result){
             // var data = "{'status':Registration Complete'}";
             
             res.send(result);
