@@ -135,10 +135,10 @@ router.get('/jobs',(req,res)=>{
 // SELECT * FROM `price`
 router.get('/jobs_fetch',(req,res)=>{
 
-        con.query("SELECT * FROM `price`", function (err, result){
+        con.query("SELECT * FROM `price`", function (err, data){
             // var data = "{'status':Registration Complete'}";
             
-            res.json({result});
+            res.json({data});
                 // "title":result.title,"desc":result.desc,"price":result.price,"hour":result.hour}); 
         });
 });
