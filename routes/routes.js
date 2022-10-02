@@ -195,6 +195,13 @@ router.get('/ngo',(req,res)=>{
         })  ;
     }
 );
+router.get('/blogs',(req,res)=>{
+    con.query("SELECT * FROM `Blogs`",function(err,result){
+        res.json({result});
+    })  ;
+}
+);
+// SELECT * FROM `Blogs` 
 module.exports = router;
 // "INSERT INTO `price`(`id`, `title`, `description`, `price`, `hour`) VALUES (NULL,'"+title+"','"+desc+"','"+price+"','"+hour+"')"
 // INSERT INTO `SOS` (`id`, `name`, `mobile`, `userid`) VALUES (NULL, 'Deepak', '8588980323', '31');
