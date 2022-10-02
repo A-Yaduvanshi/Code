@@ -110,11 +110,12 @@ router.get('/jobs',(req,res)=>{
     var price=req.query.price;
     var hour=req.query.hour;
     var userid= req.query.userid;
-    if(title != undefined && desc != undefined && price != undefined && hour != undefined){
-        con.query("INSERT INTO `price`(`id`, `title`, `description`, `price`, `hour`,`userid`) VALUES (NULL,'"+title+"','"+desc+"','"+price+"','"+hour+"','"+userid+"')", function (err, result){
+    var ngo_name=req.query.ngo_name;
+    if(title != undefined && desc != undefined && price != undefined && hour != undefined&& ngo_name!=undefined){
+        con.query("INSERT INTO `price`(`id`, `title`, `description`, `price`, `hour`,`userid`,`ngo_name`) VALUES (NULL,'"+title+"','"+desc+"','"+price+"','"+hour+"','"+userid+"','"+ngo_name+"')", function (err, result){
             // var data = "{'status':Registration Complete'}";
             res.send({"status":"200",
-                "title":title,"desc":desc,"price":price,"hour":hour}); 
+                "title":title,"desc":desc,"price":price,"hour":hour,"ngo_name":ngo_name}); 
         });
 }else{
     res.send({"status":'404'});
