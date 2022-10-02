@@ -122,8 +122,8 @@ router.get('/jobs',(req,res)=>{
 }});
 // SELECT * FROM `price`
 router.get('/jobs_fetch',(req,res)=>{
-    var userid=req.query.userid;
-        con.query("SELECT * FROM `price` WHERE `userid`!='"+userid+"'", function (err, data){
+    var ngo_name=req.query.ngo_name;
+        con.query("SELECT * FROM `price` WHERE `ngo_name`!='"+ngo_name+"'", function (err, data){
             // var data = "{'status':Registration Complete'}";
             res.json({data});
                 // "title":result.title,"desc":result.desc,"price":result.price,"hour":result.hour}); 
