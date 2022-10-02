@@ -156,9 +156,12 @@ router.post('/ngoupload', upload.single('image'), (req, res) => {
     } else {
         // res.send(req.file.filename)
         console.log(req.file)
+        var name=req.query.name;
+        var description=req.query.description;
+        var ratting=req.query.ratting;
         var imgsrc = 'https://womensafety.cleverapps.io/uploads/' + req.file.filename
         // var insertData = ""
-        con.query("INSERT INTO `ngo`(`image`) VALUES ('"+imgsrc+"')", (err, result) => {
+        con.query("INSERT INTO `ngo`(`id`, `name`, `description`, `ratting`, `image`) VALUES (NULL,'"+name+"','"+description+"','"+ratting+"','"+imgsrc+"')", (err, result) => {
             if (err) throw err
             res.send(req.file)
         })
