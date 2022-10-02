@@ -3,7 +3,7 @@ const express = require('express')
 const router = express.Router()
 var mysql = require('mysql');
 const {connect, con} = require('../mySqlConnect');
-// var uuid = require("uuid");
+var uuid = require("uuid");
 var axios = require('axios');
 const multer= require('multer');
 const path = require('path');
@@ -93,17 +93,7 @@ if(email != undefined && password != undefined){
 }
 });
 //! Use of Multer
-var storage = multer.diskStorage({
-    destination: (req, file, callBack) => {
-        callBack(null, '../uploads')     // './public/images/' directory name where save the file
-    },
-    filename: (req, file, callBack) => {
-        callBack(null, file.fieldname + '-' + Date.now() + "--"+file.originalname)
-    }
-})
-var upload = multer({
-    storage:storage
-});
+
 router.get('/jobs',(req,res)=>{
     var title=req.query.title;
     var desc=req.query.desc;
@@ -129,6 +119,18 @@ router.get('/jobs_fetch',(req,res)=>{
                 // "title":result.title,"desc":result.desc,"price":result.price,"hour":result.hour}); 
         });
 });
+
+var storage = multer.diskStorage({
+    destination: (req, file, callBack) => {
+        callBack(null, path.join(__dirname, '../uploads'))     // './public/images/' directory name where save the file
+    },
+    filename: (req, file, callBack) => {
+        callBack(null, uuid.v1()+"."+file.originalname.split(".").pop())
+    }
+})
+var upload = multer({
+    storage:storage
+});
  // handle single file upload
  router.post('/upload', upload.single('image'), (req, res) => {
     if (!req.file) {
@@ -136,6 +138,7 @@ router.get('/jobs_fetch',(req,res)=>{
         res.send("No file upload");
     } else {
         // res.send(req.file.filename)
+        console.log(req.file)
         var title=req.body.title;
         var description=req.body.description;
         var imgsrc = 'https://womensafety.cleverapps.io/uploads/' + req.file.filename
