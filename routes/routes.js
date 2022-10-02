@@ -149,6 +149,21 @@ var upload = multer({
         })
     }
 });
+router.post('/ngoupload', upload.single('image'), (req, res) => {
+    if (!req.file) {
+        console.log(req.file);
+        res.send("No file upload");
+    } else {
+        // res.send(req.file.filename)
+        console.log(req.file)
+        var imgsrc = 'https://womensafety.cleverapps.io/uploads/' + req.file.filename
+        // var insertData = ""
+        con.query("INSERT INTO `ngo`(`image`) VALUES ('"+imgsrc+"')", (err, result) => {
+            if (err) throw err
+            res.send(req.file)
+        })
+    }
+});
 /// SoS data upload api 
 router.post('/sos',(req,res)=>{
 var name=req.query.name;
