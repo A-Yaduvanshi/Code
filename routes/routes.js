@@ -159,6 +159,14 @@ if (name!=undefined&&mobile!=undefined&&userid!=undefined) {
     res.json({result:"Data is not inserted"});
 }
 });
+// SELECT * FROM `SOS` WHERE `userid`='43'
+router.get('/sos_fetch',(req,res)=>{
+    var userid=req.query.userid;
+    con.query(" SELECT * FROM `SOS` WHERE `userid`='"+userid+"'",function(err,result){
+        res.json({result});
+    })  ;
+}
+);
 /// SoS data upload api 
 router.get('/ngo',(req,res)=>{
         con.query("SELECT * FROM `ngo`",function(err,result){
