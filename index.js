@@ -11,6 +11,10 @@ app.use("/uploads", express.static(
   // path.join(__dirname, "uploads")
   "uploads"
 ))
+app.use("/ngupload", express.static(
+  // path.join(__dirname, "uploads")
+  "uploads"
+))
 
 app.use(cors());
 app.use('/api',require('./routes/routes'));
